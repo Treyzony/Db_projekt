@@ -1,0 +1,10 @@
+- mehr Mitarbeiter als Admin --> weitere Abänderungen darauf bezogen
+- mehr als nur ein Attribut pro Entity
+- keine Muss-Beziehung beim handeln Customer, einzelne Handels-Entity empfehlenswert
+- Kontodaten fehlen
+- potentiell zu viele muss-muss-Beziehungen
+- gut: Cart-Item
+- Event-Rabatte(/-Zusammenhänge) u.ä. abbilden
+- Sprachen als Domäne
+- Produkte nicht als exklusive Entities, alles auseinanderziehen
+- Category entweder Domäne oder mehr Informationen
