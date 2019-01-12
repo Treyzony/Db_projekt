@@ -10,33 +10,34 @@ CREATE Person (
 	CONSTRAINT pk_person PRIMARY KEY (person_id)
 );
 
-CREATE Admins (
-	admin_id int NOT NULL,
+CREATE Collaborator (
+	collaborator_id int NOT NULL,
 	person_id int NOT NULL,
-	CONSTRAINT pk_admins PRIMARY KEY (admin_id),
-	CONSTRAINT admins_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
+	permission_lvl DECIMAL(2) NOT NULL,
+	CONSTRAINT pk_collaborator PRIMARY KEY (collaborator_id),
+	CONSTRAINT collab_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
 );
 
 CREATE Event (
 	event_id int NOT NULL,
-	admin_id int NOT NULL,
+	collaborator_id int NOT NULL,
 	name varchar(100) NOT NULL,
 	description LONGTEXT,
 	start_date DATETIME NOT NULL,
 	end_date DATETIME NOT NULL,
 	CONSTRAINT pk_event PRIMARY KEY (event_id),
-	CONSTRAINT event_fk_admins FOREIGN KEY (admin_id) REFERENCES Admins(admin_id)
+	CONSTRAINT event_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
 CREATE News (
 	news_id int NOT NULL,
-	admin_id int NOT NULL,
+	collaborator_id int NOT NULL,
 	name varchar(100) NOT NULL,
 	start_date DATETIME NOT NULL,
 	end_date DATETIME NOT NULL,
 	message LONGTEXT,
 	CONSTRAINT pk_news PRIMARY KEY (news_id),
-	CONSTRAINT news_fk_admins FOREIGN KEY (admin_id) REFERENCES Admins(admin_id)
+	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
 CREATE Marketplace (
@@ -64,12 +65,13 @@ CREATE Product (
 CREATE Category (
 	category_id int NOT NULL,
 	name varchar(50) NOT NULL,
+	description LONGTEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
 
 CREATE Card (
 	card_id int NOT NULL,
-	converted_mana_cost varchar(30),
+	converted_mana_cost DECIMAL(2),
 	typename varchar(50),
 	subtypename varchar(59),
 	powercnt DECIMAL(2),
@@ -78,25 +80,16 @@ CREATE Card (
 	rarity varchar(30),
 	other_criteria varchar(50),
 	in_state varchar(30),
-	color_name varchar(20) NOT NULL,
-	card_language varchar(50) NOT NULL,
+	card_color varchar(20),
+	card_language varchar(50),
 	artist_id int NOT NULL,
 	card_design_id int NOT NULL,
 	CONSTRAINT pk_card PRIMARY KEY (card_id),
-	CONSTRAINT card_fk_color FOREIGN KEY (color_name) REFERENCES Color(color_name),
-	CONSTRAINT card_fk_language FOREIGN KEY (card_language) REFERENCES Card_Language(card_language),
 	CONSTRAINT card_fk_artist FOREIGN KEY (artist_id) REFERENCES Artist(artist_id),
-	CONSTRAINT card_fk_card_design FOREIGN KEY (card_design_id) REFERENCES Card_Design(card_design_id)
-);
-
-CREATE Color (
-	color_name varchar(20) NOT NULL,
-	CONSTRAINT pk_color PRIMARY KEY (color_name)
-);
-
-CREATE Card_Language (
-	card_language varchar(50),
-	CONSTRAINT pk_language PRIMARY KEY (card_language)
+	CONSTRAINT card_fk_card_design FOREIGN KEY (card_design_id) REFERENCES Card_Design(card_design_id),
+	CONSTRAINT card_domain_language CHECK (card_color IN ('white', 'blue', 'black', 'red', 'green')),
+	CONSTRAINT card_domain_language CHECK (card_language IN ('German', 'English', 'French', 'Italian',
+	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
 
 CREATE Artist (
@@ -137,9 +130,21 @@ CREATE Evaluation (
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
+CREATE Discount (
+	discount_id int NOT NULL,
+	product_id int NOT NULL,
+	event_id int,
+	name varchar(50),
+	discount_rate DECIMAL(1,3),
+	CONSTRAINT pk_discount PRIMARY KEY (discount_id),
+	CONSTRAINT disc_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id),
+	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
+);
+
 CREATE Cart (
 	cart_id int NOT NULL,
 	name varchar(50),
+	date_of_creation DATE,
 	CONSTRAINT pk_cart PRIMARY KEY (cart_id)
 );
 
@@ -151,5 +156,5 @@ CREATE Cart_Item (
 	cost_at_time DECIMAL(19,02) NOT NULL,
 	CONSTRAINT pk_cart_item PRIMARY KEY (cart_item_id),
 	CONSTRAINT ci_fk_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
-	CONSTRAINT ci_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id),
+	CONSTRAINT ci_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
