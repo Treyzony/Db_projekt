@@ -7,7 +7,8 @@ CREATE Person (
 	password varchar(50) NOT NULL,
 	address varchar(100) NOT NULL,
 	customer_rating DECIMAL(3,1),
-	CONSTRAINT pk_person PRIMARY KEY (person_id)
+	CONSTRAINT pk_person PRIMARY KEY (person_id),
+	CONSTRAINT uc_person UNIQUE (username)
 );
 
 CREATE Collaborator (
@@ -56,9 +57,17 @@ CREATE Product (
 	model varchar(50),
 	stock DECIMAL(38),
 	category_id int NOT NULL,
+	card_id int,
+	card_set_id int,
+	merch_id int,
+	evaluation_id int,
 	CONSTRAINT prod_stock_gon CHECK (stock>=0),
 	CONSTRAINT pk_product PRIMARY KEY (product_id),
 	CONSTRAINT product_fk_category FOREIGN KEY (category_id) REFERENCES Category(category_id),
+	CONSTRAINT product_fk_card FOREIGN KEY (card_id) REFERENCES Card(card_id),
+	CONSTRAINT product_fk_card_set FOREIGN KEY (card_set_id) REFERENCES Card_Set(set_id),
+	CONSTRAINT product_fk_merch FOREIGN KEY (merch_id) REFERENCES Merch(merch_id),
+	CONSTRAINT product_fk_evaluation FOREIGN KEY (evaluation_id) REFERENCES Evaluation(evaluation_id),
 	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
@@ -71,6 +80,7 @@ CREATE Category (
 
 CREATE Card (
 	card_id int NOT NULL,
+	name varchar(30) NOT NULL,
 	converted_mana_cost DECIMAL(2),
 	typename varchar(50),
 	subtypename varchar(59),
