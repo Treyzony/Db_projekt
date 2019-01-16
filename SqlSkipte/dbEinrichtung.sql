@@ -149,12 +149,16 @@ CREATE TABLE Evaluation (
 
 CREATE TABLE Discount (
 	discount_id int NOT NULL,
-	product_id int NOT NULL,
+	product_id int,
+	category_id int,
 	event_id int,
 	name varchar(50),
 	discount_rate DECIMAL(1,3),
+	CONSTRAINT chk_just_one CHECK ((product_id = NULL AND category_id != NULL)
+		OR (product_id != NULL AND category_id = NULL)),
 	CONSTRAINT pk_discount PRIMARY KEY (discount_id),
 	CONSTRAINT disc_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id),
+	CONSTRAINT disc_fk_category FOREIGN KEY (category_id) REFERENCES Category(category_id),
 	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
 
