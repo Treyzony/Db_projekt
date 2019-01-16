@@ -27,4 +27,21 @@ FROM Product JOIN Category ON Product.category_id = Category.category_id
 LEFT JOIN Card ON Product.card_id = Card.card_id
 LEFT JOIN Card_Set ON Product.card_set_id = Card_Set.set_id
 LEFT JOIN Merch ON Product.merch_id = Merch.merch_id
-LEFT JOIN Evaluation ON Product.evaluation_id = Evaluation.evaluation_id
+LEFT JOIN Evaluation ON Product.evaluation_id = Evaluation.evaluation_id;
+
+CREATE VIEW Cardinfo AS
+SELECT Card.name, Card.converted_mana_cost, Card.typename, Card.subtypename, Card.powercnt, Card.toughness,
+Card.rules, Card.rarity, Card.other_criteria, Card.in_state, Card.card_color, Card.card_language,
+CONCAT(Artist.first_name, CONCAT(' ', Artist.last_name)) AS artistname, Card_Design.image, Card_Design.cover
+FROM Card LEFT JOIN Artist ON Card.artist_id = Artist.artist_id
+LEFT JOIN Card_Design ON Card.card_design_id = Card_Design.card_design_id;
+
+CREATE VIEW Cart_Overview AS
+SELECT Cart.cart_id, Cart.name AS cartname, Cart.buyer_id, Cart.date_of_creation, CONCAT(Person.first_name, CONCAT(' ', Person.last_name)) AS buyername,
+Cart_Item.quantity, Cart_Item.cost_at_time, Product.product_id, Product.price AS current_price, Product.stock,
+Category.name AS categoryname, Marketplace.marketplace_id, Marketplace.name
+FROM Cart_Item JOIN Cart ON Cart_item.cart_id = Cart.cart_id
+JOIN Product ON Cart_Item.product_id = Product.product_id
+JOIN Person ON Cart.buyer_id = Person.person_id
+JOIN Marketplace ON Product.marketplace_id = Marketplace.marketplace_id
+GROUP BY Cart.cart_id;

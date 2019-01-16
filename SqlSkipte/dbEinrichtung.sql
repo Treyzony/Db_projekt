@@ -1,4 +1,4 @@
-CREATE Person (
+CREATE TABLE Person (
 	person_id int NOT NULL,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
@@ -11,7 +11,7 @@ CREATE Person (
 	CONSTRAINT uc_person UNIQUE (username)
 );
 
-CREATE Collaborator (
+CREATE TABLE Collaborator (
 	collaborator_id int NOT NULL,
 	person_id int NOT NULL,
 	permission_lvl DECIMAL(2) NOT NULL,
@@ -19,7 +19,7 @@ CREATE Collaborator (
 	CONSTRAINT collab_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
 );
 
-CREATE Event (
+CREATE TABLE Event (
 	event_id int NOT NULL,
 	collaborator_id int NOT NULL,
 	name varchar(100) NOT NULL,
@@ -30,7 +30,7 @@ CREATE Event (
 	CONSTRAINT event_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
-CREATE News (
+CREATE TABLE News (
 	news_id int NOT NULL,
 	collaborator_id int NOT NULL,
 	name varchar(100) NOT NULL,
@@ -41,7 +41,7 @@ CREATE News (
 	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
-CREATE Marketplace (
+CREATE TABLE Marketplace (
 	marketplace_id int NOT NULL,
 	owner_id int NOT NULL,
 	name varchar(100) NOT NULL,
@@ -50,7 +50,7 @@ CREATE Marketplace (
 	CONSTRAINT market_fk_owner FOREIGN KEY (owner_id) REFERENCES Person(person_id)
 );
 
-CREATE Product (
+CREATE TABLE Product (
 	product_id int NOT NULL,
 	marketplace_id int NOT NULL,
 	price DECIMAL(19,2) NOT NULL,
@@ -71,14 +71,14 @@ CREATE Product (
 	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
-CREATE Category (
+CREATE TABLE Category (
 	category_id int NOT NULL,
 	name varchar(50) NOT NULL,
 	description LONGTEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
 
-CREATE Card (
+CREATE TABLE Card (
 	card_id int NOT NULL,
 	name varchar(30) NOT NULL,
 	converted_mana_cost DECIMAL(2),
@@ -92,8 +92,8 @@ CREATE Card (
 	in_state varchar(30),
 	card_color varchar(20),
 	card_language varchar(50),
-	artist_id int NOT NULL,
-	card_design_id int NOT NULL,
+	artist_id int,
+	card_design_id int,
 	CONSTRAINT pk_card PRIMARY KEY (card_id),
 	CONSTRAINT card_fk_artist FOREIGN KEY (artist_id) REFERENCES Artist(artist_id),
 	CONSTRAINT card_fk_card_design FOREIGN KEY (card_design_id) REFERENCES Card_Design(card_design_id),
@@ -102,21 +102,28 @@ CREATE Card (
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
 
-CREATE Artist (
+CREATE TABLE Artist (
 	artist_id int NOT NULL,
 	first_name varchar(50),
 	last_name varchar(50),
 	CONSTRAINT pk_artist PRIMARY KEY (artist_id)
 );
 
-CREATE Card_Set (
+CREATE TABLE Card_Design (
+	card_design_id int NOT NULL,
+	image varchar(100),
+	cover varchar(100),
+	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
+);
+
+CREATE TABLE Card_Set (
 	set_id int NOT NULL,
 	name varchar(50),
 	max_cards DECIMAL(3) NOT NULL,
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
 
-CREATE Cards_In_Set (
+CREATE TABLE Cards_In_Set (
 	set_id int NOT NULL
 	card_id int NOT NULL,
 	number_in_set DECIMAL(3),
@@ -125,14 +132,14 @@ CREATE Cards_In_Set (
 	CONSTRAINT pk_cis PRIMARY KEY (set_id, card_id)
 );
 
-CREATE Merch (
+CREATE TABLE Merch (
 	merch_id int NOT NULL,
 	name varchar(50) NOT NULL,
 	typename varchar(50) NOT NULL,
 	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
 );
 
-CREATE Evaluation (
+CREATE TABLE Evaluation (
 	evaluation_id int NOT NULL,
 	rating DECIMAL(19,2) NOT NULL,
 	qualtity varchar(50) NOT NULL,
@@ -140,7 +147,7 @@ CREATE Evaluation (
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
-CREATE Discount (
+CREATE TABLE Discount (
 	discount_id int NOT NULL,
 	product_id int NOT NULL,
 	event_id int,
@@ -151,14 +158,16 @@ CREATE Discount (
 	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
 
-CREATE Cart (
+CREATE TABLE Cart (
 	cart_id int NOT NULL,
+	buyer_id int NOT NULL,
 	name varchar(50),
 	date_of_creation DATE,
-	CONSTRAINT pk_cart PRIMARY KEY (cart_id)
+	CONSTRAINT pk_cart PRIMARY KEY (cart_id),
+	CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES Person(person_id)
 );
 
-CREATE Cart_Item (
+CREATE TABLE Cart_Item (
 	cart_item_id int NOT NULL,
 	cart_id int NOT NULL,
 	product_id int NOT NULL,
