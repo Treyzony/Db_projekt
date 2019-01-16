@@ -17,7 +17,7 @@ LEFT JOIN Person ON Collaborator.person_id = Person.person_id;
 
 CREATE VIEW Product_Discountinfo AS
 SELECT Discount.discount_id, Discount.name AS discountname, Discount.discount_rate, Product.product_id,
-Product.marketplace_id, Marketplace.name AS marketplacename Product.stock, Product.price, Category.name
+Product.marketplace_id, Marketplace.name AS marketplacename Product.stock, Product.price, Category.name AS categoryname
 FROM Discount JOIN Product ON Discount.product_id = Product.product_id
 JOIN Category ON Product.category_id = Category.category_id
 JOIN Marketplace ON Product.marketplace_id = Marketplace.marketplace_id
@@ -25,7 +25,12 @@ WHERE Discount.category_id = NULL
 GROUP BY Discount.discount_id, Marketplace.name
 ORDER BY Product.product_id;
 
---Discountinfos für Categorys
+CREATE VIEW Category_Discountinfo AS
+SELECT Discount.discount_id, Discount.name AS discountname, Discount.discount_rate, Category.name AS categoryname
+FROM Discount JOIN Category ON Discount.category_id = Category.category_id
+WHERE Discount.product_id = NULL
+GROUP BY Discount.discount_id
+ORDER BY Category.category_id;
 
 CREATE VIEW Marketplaceinfo AS
 SELECT Marketplace.name, Marketplace.rating, Person.username, Person.first_name, Person.last_name,
