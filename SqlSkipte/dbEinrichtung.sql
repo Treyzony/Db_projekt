@@ -50,25 +50,12 @@ CREATE TABLE Marketplace (
 	CONSTRAINT market_fk_owner FOREIGN KEY (owner_id) REFERENCES Person(person_id)
 );
 
-CREATE TABLE Product (
-	product_id int NOT NULL,
-	marketplace_id int NOT NULL,
-	price DECIMAL(19,2) NOT NULL,
-	model varchar(50),
-	stock DECIMAL(38),
-	category_id int NOT NULL,
-	card_id int,
-	card_set_id int,
-	merch_id int,
-	evaluation_id int,
-	CONSTRAINT prod_stock_gon CHECK (stock>=0),
-	CONSTRAINT pk_product PRIMARY KEY (product_id),
-	CONSTRAINT product_fk_category FOREIGN KEY (category_id) REFERENCES Category(category_id),
-	CONSTRAINT product_fk_card FOREIGN KEY (card_id) REFERENCES Card(card_id),
-	CONSTRAINT product_fk_card_set FOREIGN KEY (card_set_id) REFERENCES Card_Set(set_id),
-	CONSTRAINT product_fk_merch FOREIGN KEY (merch_id) REFERENCES Merch(merch_id),
-	CONSTRAINT product_fk_evaluation FOREIGN KEY (evaluation_id) REFERENCES Evaluation(evaluation_id),
-	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
+CREATE TABLE Evaluation (
+	evaluation_id int NOT NULL,
+	rating DECIMAL(19,2) NOT NULL,
+	qualtity varchar(50) NOT NULL,
+	evaluation_comment LONGTEXT,
+	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
 CREATE TABLE Category (
@@ -76,6 +63,27 @@ CREATE TABLE Category (
 	name varchar(50) NOT NULL,
 	description LONGTEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
+);
+
+CREATE TABLE Artist (
+	artist_id int NOT NULL,
+	first_name varchar(50),
+	last_name varchar(50),
+	CONSTRAINT pk_artist PRIMARY KEY (artist_id)
+);
+
+CREATE TABLE Card_Design (
+	card_design_id int NOT NULL,
+	image varchar(100),
+	cover varchar(100),
+	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
+);
+
+CREATE TABLE Merch (
+	merch_id int NOT NULL,
+	name varchar(50) NOT NULL,
+	typename varchar(50) NOT NULL,
+	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
 );
 
 CREATE TABLE Card (
@@ -102,49 +110,41 @@ CREATE TABLE Card (
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
 
-CREATE TABLE Artist (
-	artist_id int NOT NULL,
-	first_name varchar(50),
-	last_name varchar(50),
-	CONSTRAINT pk_artist PRIMARY KEY (artist_id)
-);
-
-CREATE TABLE Card_Design (
-	card_design_id int NOT NULL,
-	image varchar(100),
-	cover varchar(100),
-	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
-);
-
 CREATE TABLE Card_Set (
 	set_id int NOT NULL,
 	name varchar(50),
-	max_cards DECIMAL(3) NOT NULL,
+	max_cards DECIMAL(3,0) NOT NULL,
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
 
 CREATE TABLE Cards_In_Set (
-	set_id int NOT NULL
+	set_id int NOT NULL,
 	card_id int NOT NULL,
-	number_in_set DECIMAL(3),
+	number_in_set DECIMAL(3,0),
 	CONSTRAINT cis_fk_set_id FOREIGN KEY (set_id) REFERENCES Card_Set(set_id),
 	CONSTRAINT cis_fk_card_id FOREIGN KEY (card_id) REFERENCES Card(card_id),
 	CONSTRAINT pk_cis PRIMARY KEY (set_id, card_id)
 );
 
-CREATE TABLE Merch (
-	merch_id int NOT NULL,
-	name varchar(50) NOT NULL,
-	typename varchar(50) NOT NULL,
-	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
-);
-
-CREATE TABLE Evaluation (
-	evaluation_id int NOT NULL,
-	rating DECIMAL(19,2) NOT NULL,
-	qualtity varchar(50) NOT NULL,
-	evaluation_comment LONGTEXT,
-	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
+CREATE TABLE Product (
+	product_id int NOT NULL,
+	marketplace_id int NOT NULL,
+	price DECIMAL(19,2) NOT NULL,
+	model varchar(50),
+	stock DECIMAL(38),
+	category_id int NOT NULL,
+	card_id int,
+	card_set_id int,
+	merch_id int,
+	evaluation_id int,
+	CONSTRAINT prod_stock_gon CHECK (stock>=0),
+	CONSTRAINT pk_product PRIMARY KEY (product_id),
+	CONSTRAINT product_fk_category FOREIGN KEY (category_id) REFERENCES Category(category_id),
+	CONSTRAINT product_fk_card FOREIGN KEY (card_id) REFERENCES Card(card_id),
+	CONSTRAINT product_fk_card_set FOREIGN KEY (card_set_id) REFERENCES Card_Set(set_id),
+	CONSTRAINT product_fk_merch FOREIGN KEY (merch_id) REFERENCES Merch(merch_id),
+	CONSTRAINT product_fk_evaluation FOREIGN KEY (evaluation_id) REFERENCES Evaluation(evaluation_id),
+	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
 CREATE TABLE Discount (
@@ -153,7 +153,7 @@ CREATE TABLE Discount (
 	category_id int,
 	event_id int,
 	name varchar(50),
-	discount_rate DECIMAL(1,3),
+	discount_rate DECIMAL(4,3),
 	CONSTRAINT chk_just_one CHECK ((product_id = NULL AND category_id != NULL)
 		OR (product_id != NULL AND category_id = NULL)),
 	CONSTRAINT pk_discount PRIMARY KEY (discount_id),
@@ -175,7 +175,7 @@ CREATE TABLE Cart_Item (
 	cart_item_id int NOT NULL,
 	cart_id int NOT NULL,
 	product_id int NOT NULL,
-	quantity DECIMAL(3) NOT NULL DEFAULT 1,
+	quantity DECIMAL(3,0) NOT NULL DEFAULT 1,
 	cost_at_time DECIMAL(19,02) NOT NULL,
 	CONSTRAINT pk_cart_item PRIMARY KEY (cart_item_id),
 	CONSTRAINT ci_fk_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
