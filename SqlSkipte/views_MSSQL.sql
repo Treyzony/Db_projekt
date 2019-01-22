@@ -43,7 +43,7 @@ LEFT JOIN Merch ON Product.merch_id = Merch.merch_id
 LEFT JOIN Evaluation ON Product.evaluation_id = Evaluation.evaluation_id;
 
 CREATE VIEW Cardinfo AS
-SELECT Card.name, Card.converted_mana_cost, Card.typename, Card.subtypename, Card.powercnt, Card.toughness,
+SELECT Card.card_id, Card.name, Card.converted_mana_cost, Card.typename, Card.subtypename, Card.powercnt, Card.toughness,
 Card.rules, Card.rarity, Card.other_criteria, Card.in_state, Card.card_color, Card.card_language,
 Card.artistname, Card_Design.image, Card_Design.cover
 FROM Card LEFT JOIN Card_Design ON Card.card_design_id = Card_Design.card_design_id;
