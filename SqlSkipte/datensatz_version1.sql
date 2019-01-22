@@ -8,6 +8,10 @@ INSERT INTO `person` (`person_id`, `first_name`, `last_name`, `email_id`, `usern
 (5, 'Mead', 'Jarlmann', 'mjarlmanna@themeforest.net', 'mjarlmanna', 'ImgE1zppq6K', 'Quatre Bornes', '45324525', '5 Jana Trail', NULL),
 (6, 'Niall', 'Kynvin', 'nkynvine@xinhuanet.com', '', 'WHC5scFwMJ', 'Schieren', 'L-9184', 'hgdfh', NULL);
 
+INSERT INTO `collaborator` (`collaborator_id`, `person_id`, `permission_lvl`) VALUES
+(1, 1, '0'),
+(2, 3, '1');
+
 INSERT INTO `merch` (`merch_id`, `name`, `typename`) VALUES (NULL, 'Magic Karten T shirt', 'Kleidung'), (NULL, 'Magic Karten Pullover', 'Kleidung');
 
 INSERT INTO `event` (`event_id`, `collaborator_id`, `name`, `description`, `start_date`, `end_date`) VALUES (NULL, '1', 'Black Friday', 'Jetz gibts rabat aktionen auf verschiedene Artikel', '2019-01-24 00:00:00', '2019-01-26 00:00:00'), (NULL, '1', 'Osterm', 'Alle rote Karten sid reduziert', '2019-01-24 00:00:00', '2019-01-25 00:00:00');
