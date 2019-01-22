@@ -1,4 +1,4 @@
-id,first_name,last_name,email,passwort,city,zip,street
+person_id,first_name,last_name,email_id,passwort,city,zip,street
 1,Cece,Kobpal,ckobpal0@linkedin.com,Uf22CX2L7JyF,Sungaiduri,,90 Mendota Avenue
 2,Lorilyn,Goudy,lgoudy1@yelp.com,S8qEuIw009,Sapouy,,088 Bartelt Drive
 3,Maryjo,Cottie,mcottie2@free.fr,wqd0tUqQcFX,Ḩalwān,,4079 Red Cloud Park
