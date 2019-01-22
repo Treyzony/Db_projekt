@@ -174,13 +174,13 @@ CREATE TABLE Card (
 	rarity varchar(30),
 	other_criteria varchar(50),
 	in_state varchar(30),
-	card_color varchar(20),
+	card_color char(1),
 	card_language varchar(50),
 	artistname varchar(100),
 	card_design_id int,
 	CONSTRAINT pk_card PRIMARY KEY (card_id),
 	CONSTRAINT card_fk_card_design FOREIGN KEY (card_design_id) REFERENCES Card_Design(card_design_id),
-	CONSTRAINT card_domain_color CHECK (card_color IN ('white', 'blue', 'black', 'red', 'green')),
+	CONSTRAINT card_domain_color CHECK (card_color IN ('W', 'U', 'B', 'R', 'G')),
 	CONSTRAINT card_domain_language CHECK (card_language IN ('German', 'English', 'French', 'Italian',
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
