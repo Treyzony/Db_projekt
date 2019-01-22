@@ -37,7 +37,7 @@ CREATE TABLE Event (
 	event_id int NOT NULL,
 	collaborator_id int NOT NULL,
 	name varchar(100) NOT NULL,
-	description LONGTEXT,
+	description TEXT,
 	start_date DATETIME NOT NULL,
 	end_date DATETIME NOT NULL,
 	CONSTRAINT pk_event PRIMARY KEY (event_id),
@@ -56,7 +56,7 @@ CREATE TABLE News (
 	name varchar(100) NOT NULL,
 	start_date DATETIME NOT NULL,
 	end_date DATETIME NOT NULL,
-	message LONGTEXT,
+	message TEXT,
 	CONSTRAINT pk_news PRIMARY KEY (news_id),
 	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
@@ -86,7 +86,7 @@ CREATE TABLE Evaluation (
 	evaluation_id int NOT NULL,
 	rating DECIMAL(19,2) NOT NULL,
 	qualtity varchar(50) NOT NULL,
-	evaluation_comment LONGTEXT,
+	evaluation_comment TEXT,
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
@@ -99,7 +99,7 @@ CACHE 10;
 CREATE TABLE Category (
 	category_id int NOT NULL,
 	name varchar(50) NOT NULL,
-	description LONGTEXT,
+	description TEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
 
