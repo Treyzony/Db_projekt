@@ -5,11 +5,19 @@ CREATE TABLE Person (
 	email_id varchar(50) NOT NULL,
 	username varchar(50) NOT NULL,
 	password varchar(50) NOT NULL,
-	address varchar(100) NOT NULL,
+	city varchar(100) NOT NULL,
+	zip varchar(100) NOT NULL,
+	street varchar(100) NOT NULL,
 	customer_rating DECIMAL(3,1),
 	CONSTRAINT pk_person PRIMARY KEY (person_id),
 	CONSTRAINT uc_person UNIQUE (username)
 );
+
+CREATE SEQUENCE seq_person
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10;
 
 CREATE TABLE Collaborator (
 	collaborator_id int NOT NULL,
@@ -18,6 +26,12 @@ CREATE TABLE Collaborator (
 	CONSTRAINT pk_collaborator PRIMARY KEY (collaborator_id),
 	CONSTRAINT collab_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
 );
+
+CREATE SEQUENCE seq_collaborator
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Event (
 	event_id int NOT NULL,
@@ -30,6 +44,12 @@ CREATE TABLE Event (
 	CONSTRAINT event_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE SEQUENCE seq_event
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE News (
 	news_id int NOT NULL,
 	collaborator_id int NOT NULL,
@@ -41,14 +61,26 @@ CREATE TABLE News (
 	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE SEQUENCE seq_news
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE Marketplace (
 	marketplace_id int NOT NULL,
 	owner_id int NOT NULL,
 	name varchar(100) NOT NULL,
-	rating FLOAT(3,1),
+	rating DECIMAL(3,1),
 	CONSTRAINT pk_marketplace PRIMARY KEY (marketplace_id),
 	CONSTRAINT market_fk_owner FOREIGN KEY (owner_id) REFERENCES Person(person_id)
 );
+
+CREATE SEQUENCE seq_marketplace
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Evaluation (
 	evaluation_id int NOT NULL,
@@ -58,6 +90,12 @@ CREATE TABLE Evaluation (
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
+CREATE SEQUENCE seq_evaluation
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE Category (
 	category_id int NOT NULL,
 	name varchar(50) NOT NULL,
@@ -65,12 +103,11 @@ CREATE TABLE Category (
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
 
-CREATE TABLE Artist (
-	artist_id int NOT NULL,
-	first_name varchar(50),
-	last_name varchar(50),
-	CONSTRAINT pk_artist PRIMARY KEY (artist_id)
-);
+CREATE SEQUENCE seq_category
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Card_Design (
 	card_design_id int NOT NULL,
@@ -79,12 +116,24 @@ CREATE TABLE Card_Design (
 	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
 );
 
+CREATE SEQUENCE seq_card_design
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE Merch (
 	merch_id int NOT NULL,
 	name varchar(50) NOT NULL,
 	typename varchar(50) NOT NULL,
 	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
 );
+
+CREATE SEQUENCE seq_merch
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Card (
 	card_id int NOT NULL,
@@ -100,15 +149,20 @@ CREATE TABLE Card (
 	in_state varchar(30),
 	card_color varchar(20),
 	card_language varchar(50),
-	artist_id int,
+	artistname varchar(100),
 	card_design_id int,
 	CONSTRAINT pk_card PRIMARY KEY (card_id),
-	CONSTRAINT card_fk_artist FOREIGN KEY (artist_id) REFERENCES Artist(artist_id),
 	CONSTRAINT card_fk_card_design FOREIGN KEY (card_design_id) REFERENCES Card_Design(card_design_id),
-	CONSTRAINT card_domain_language CHECK (card_color IN ('white', 'blue', 'black', 'red', 'green')),
+	CONSTRAINT card_domain_color CHECK (card_color IN ('white', 'blue', 'black', 'red', 'green')),
 	CONSTRAINT card_domain_language CHECK (card_language IN ('German', 'English', 'French', 'Italian',
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
+
+CREATE SEQUENCE seq_card
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Card_Set (
 	set_id int NOT NULL,
@@ -116,6 +170,12 @@ CREATE TABLE Card_Set (
 	max_cards DECIMAL(3,0) NOT NULL,
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
+
+CREATE SEQUENCE seq_card_set
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Cards_In_Set (
 	set_id int NOT NULL,
@@ -125,6 +185,12 @@ CREATE TABLE Cards_In_Set (
 	CONSTRAINT cis_fk_card_id FOREIGN KEY (card_id) REFERENCES Card(card_id),
 	CONSTRAINT pk_cis PRIMARY KEY (set_id, card_id)
 );
+
+CREATE SEQUENCE seq_cards_in_set
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Product (
 	product_id int NOT NULL,
@@ -147,6 +213,12 @@ CREATE TABLE Product (
 	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
+CREATE SEQUENCE seq_product
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE Discount (
 	discount_id int NOT NULL,
 	product_id int,
@@ -162,6 +234,12 @@ CREATE TABLE Discount (
 	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
 
+CREATE SEQUENCE seq_discount
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
+
 CREATE TABLE Cart (
 	cart_id int NOT NULL,
 	buyer_id int NOT NULL,
@@ -170,6 +248,12 @@ CREATE TABLE Cart (
 	CONSTRAINT pk_cart PRIMARY KEY (cart_id),
 	CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES Person(person_id)
 );
+
+CREATE SEQUENCE seq_cart
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 
 
 CREATE TABLE Cart_Item (
 	cart_item_id int NOT NULL,
@@ -181,3 +265,9 @@ CREATE TABLE Cart_Item (
 	CONSTRAINT ci_fk_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
 	CONSTRAINT ci_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
+
+CREATE SEQUENCE seq_cart_item
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10; 

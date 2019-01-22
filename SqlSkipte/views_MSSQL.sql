@@ -21,16 +21,12 @@ Product.marketplace_id, Marketplace.name AS marketplacename, Product.stock, Prod
 FROM Discount JOIN Product ON Discount.product_id = Product.product_id
 JOIN Category ON Product.category_id = Category.category_id
 JOIN Marketplace ON Product.marketplace_id = Marketplace.marketplace_id
-WHERE Discount.category_id = NULL
-GROUP BY Discount.discount_id, Marketplace.name
-ORDER BY Product.product_id;
+WHERE Discount.category_id = NULL;
 
 CREATE VIEW Category_Discountinfo AS
 SELECT Discount.discount_id, Discount.name AS discountname, Discount.discount_rate, Category.name AS categoryname
 FROM Discount JOIN Category ON Discount.category_id = Category.category_id
-WHERE Discount.product_id = NULL
-GROUP BY Discount.discount_id
-ORDER BY Category.category_id;
+WHERE Discount.product_id = NULL;
 
 CREATE VIEW Marketplaceinfo AS
 SELECT Marketplace.name, Marketplace.rating, Person.username, Person.first_name, Person.last_name,
@@ -60,13 +56,10 @@ FROM Cart_Item JOIN Cart ON Cart_item.cart_id = Cart.cart_id
 JOIN Product ON Cart_Item.product_id = Product.product_id
 JOIN Category ON Product.category_id = Category.category_id
 JOIN Person ON Cart.buyer_id = Person.person_id
-JOIN Marketplace ON Product.marketplace_id = Marketplace.marketplace_id
-GROUP BY Cart.cart_id;
+JOIN Marketplace ON Product.marketplace_id = Marketplace.marketplace_id;
 
 CREATE VIEW Card_Set_Overview AS
 SELECT Card_Set.set_id, Card_Set.name AS setname, Card_Set.max_cards, Card.card_id, Card.name AS cardname,
 Cards_In_Set.number_in_set
 FROM Card_Set LEFT JOIN Cards_In_Set ON Card_Set.set_id = Cards_In_Set.set_id
-LEFT JOIN Card ON Cards_In_Set.card_id = Card.card_id
-GROUP BY Card_Set.set_id
-ORDER BY Cards_In_Set.number_in_set;
+LEFT JOIN Card ON Cards_In_Set.card_id = Card.card_id;
