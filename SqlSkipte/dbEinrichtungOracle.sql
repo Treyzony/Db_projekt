@@ -13,6 +13,9 @@ CREATE TABLE Person (
 	CONSTRAINT uc_person UNIQUE (username)
 );
 
+CREATE INDEX idx_person_id_username
+ON Person (person_id, username);
+
 CREATE SEQUENCE seq_person
 MINVALUE 1
 START WITH 1
@@ -26,6 +29,9 @@ CREATE TABLE Collaborator (
 	CONSTRAINT pk_collaborator PRIMARY KEY (collaborator_id),
 	CONSTRAINT collab_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
 );
+
+CREATE INDEX idx_collaborator_id
+ON Collaborator (collaborator_id);
 
 CREATE SEQUENCE seq_collaborator
 MINVALUE 1
@@ -44,6 +50,9 @@ CREATE TABLE Event (
 	CONSTRAINT event_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE INDEX idx_event_id
+ON Event (event_id);
+
 CREATE SEQUENCE seq_event
 MINVALUE 1
 START WITH 1
@@ -61,6 +70,9 @@ CREATE TABLE News (
 	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE INDEX idx_news_id
+ON News (news_id);
+
 CREATE SEQUENCE seq_news
 MINVALUE 1
 START WITH 1
@@ -76,6 +88,9 @@ CREATE TABLE Marketplace (
 	CONSTRAINT market_fk_owner FOREIGN KEY (owner_id) REFERENCES Person(person_id)
 );
 
+CREATE INDEX idx_marketplace_id
+ON Marketplace (marketplace_id);
+
 CREATE SEQUENCE seq_marketplace
 MINVALUE 1
 START WITH 1
@@ -90,6 +105,9 @@ CREATE TABLE Evaluation (
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
+CREATE INDEX idx_evaluation_id
+ON Evaluation (evaluation_id);
+
 CREATE SEQUENCE seq_evaluation
 MINVALUE 1
 START WITH 1
@@ -102,6 +120,9 @@ CREATE TABLE Category (
 	description TEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
+
+CREATE INDEX idx_category_id
+ON Category (category_id);
 
 CREATE SEQUENCE seq_category
 MINVALUE 1
@@ -116,6 +137,9 @@ CREATE TABLE Card_Design (
 	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
 );
 
+CREATE INDEX idx_card_design_id
+ON Card_Design (card_design_id);
+
 CREATE SEQUENCE seq_card_design
 MINVALUE 1
 START WITH 1
@@ -128,6 +152,9 @@ CREATE TABLE Merch (
 	typename varchar(50) NOT NULL,
 	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
 );
+
+CREATE INDEX idx_merch_id
+ON Merch (merch_id);
 
 CREATE SEQUENCE seq_merch
 MINVALUE 1
@@ -158,6 +185,9 @@ CREATE TABLE Card (
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
 
+CREATE INDEX idx_card_id_name
+ON Card (card_id, name);
+
 CREATE SEQUENCE seq_card
 MINVALUE 1
 START WITH 1
@@ -170,6 +200,9 @@ CREATE TABLE Card_Set (
 	max_cards DECIMAL(3,0) NOT NULL,
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
+
+CREATE INDEX idx_card_set_id
+ON Card_Set (set_id);
 
 CREATE SEQUENCE seq_card_set
 MINVALUE 1
@@ -185,6 +218,9 @@ CREATE TABLE Cards_In_Set (
 	CONSTRAINT cis_fk_card_id FOREIGN KEY (card_id) REFERENCES Card(card_id),
 	CONSTRAINT pk_cis PRIMARY KEY (set_id, card_id)
 );
+
+CREATE INDEX idx_cards_in_set_ids
+ON Cards_In_Set (set_id, card_id);
 
 CREATE SEQUENCE seq_cards_in_set
 MINVALUE 1
@@ -213,6 +249,9 @@ CREATE TABLE Product (
 	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
+CREATE INDEX idx_product_ids
+ON Product (product_id, marketplace_id);
+
 CREATE SEQUENCE seq_product
 MINVALUE 1
 START WITH 1
@@ -234,6 +273,9 @@ CREATE TABLE Discount (
 	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
 
+CREATE INDEX idx_discount_ids
+ON Discount (discount_id, product_id, category_id);
+
 CREATE SEQUENCE seq_discount
 MINVALUE 1
 START WITH 1
@@ -248,6 +290,9 @@ CREATE TABLE Cart (
 	CONSTRAINT pk_cart PRIMARY KEY (cart_id),
 	CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES Person(person_id)
 );
+
+CREATE INDEX idx_cart_ids
+ON Cart (cart_id, buyer_id);
 
 CREATE SEQUENCE seq_cart
 MINVALUE 1
@@ -265,6 +310,9 @@ CREATE TABLE Cart_Item (
 	CONSTRAINT ci_fk_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
 	CONSTRAINT ci_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
+
+CREATE INDEX idx_cart_item_ids
+ON Cart_Item (cart_item_id, cart_id, product_id);
 
 CREATE SEQUENCE seq_cart_item
 MINVALUE 1

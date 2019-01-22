@@ -13,6 +13,9 @@ CREATE TABLE Person (
 	CONSTRAINT uc_person UNIQUE (username)
 );
 
+CREATE INDEX idx_person_id_username
+ON Person (person_id, username);
+
 CREATE TABLE Collaborator (
 	collaborator_id int NOT NULL AUTO_INCREMENT,
 	person_id int NOT NULL,
@@ -20,6 +23,9 @@ CREATE TABLE Collaborator (
 	CONSTRAINT pk_collaborator PRIMARY KEY (collaborator_id),
 	CONSTRAINT collab_fk_person FOREIGN KEY (person_id) REFERENCES Person(person_id)
 );
+
+CREATE INDEX idx_collaborator_id
+ON Collaborator (collaborator_id);
 
 CREATE TABLE Event (
 	event_id int NOT NULL AUTO_INCREMENT,
@@ -32,6 +38,9 @@ CREATE TABLE Event (
 	CONSTRAINT event_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE INDEX idx_event_id
+ON Event (event_id);
+
 CREATE TABLE News (
 	news_id int NOT NULL AUTO_INCREMENT,
 	collaborator_id int NOT NULL,
@@ -43,6 +52,9 @@ CREATE TABLE News (
 	CONSTRAINT news_fk_collaborator FOREIGN KEY (collaborator_id) REFERENCES Collaborator(collaborator_id)
 );
 
+CREATE INDEX idx_news_id
+ON News (news_id);
+
 CREATE TABLE Marketplace (
 	marketplace_id int NOT NULL AUTO_INCREMENT,
 	owner_id int NOT NULL,
@@ -52,6 +64,9 @@ CREATE TABLE Marketplace (
 	CONSTRAINT market_fk_owner FOREIGN KEY (owner_id) REFERENCES Person(person_id)
 );
 
+CREATE INDEX idx_marketplace_id
+ON Marketplace (marketplace_id);
+
 CREATE TABLE Evaluation (
 	evaluation_id int NOT NULL AUTO_INCREMENT,
 	rating DECIMAL(19,2) NOT NULL,
@@ -60,12 +75,18 @@ CREATE TABLE Evaluation (
 	CONSTRAINT pk_evaluation PRIMARY KEY (evaluation_id)
 );
 
+CREATE INDEX idx_evaluation_id
+ON Evaluation (evaluation_id);
+
 CREATE TABLE Category (
 	category_id int NOT NULL AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
 	description LONGTEXT,
 	CONSTRAINT pk_category PRIMARY KEY (category_id)
 );
+
+CREATE INDEX idx_category_id
+ON Category (category_id);
 
 CREATE TABLE Card_Design (
 	card_design_id int NOT NULL AUTO_INCREMENT,
@@ -74,12 +95,18 @@ CREATE TABLE Card_Design (
 	CONSTRAINT pk_card_design PRIMARY KEY (card_design_id)
 );
 
+CREATE INDEX idx_card_design_id
+ON Card_Design (card_design_id);
+
 CREATE TABLE Merch (
 	merch_id int NOT NULL AUTO_INCREMENT,
 	name varchar(50) NOT NULL,
 	typename varchar(50) NOT NULL,
 	CONSTRAINT pk_merch PRIMARY KEY (merch_id)
 );
+
+CREATE INDEX idx_merch_id
+ON Merch (merch_id);
 
 CREATE TABLE Card (
 	card_id int NOT NULL AUTO_INCREMENT,
@@ -104,12 +131,18 @@ CREATE TABLE Card (
 	'Spanish', 'Portoguese', 'Russian', 'Korean', 'Japanese', 'S-Chinese', 'T-Chinese', 'Dead Language'))
 );
 
+CREATE INDEX idx_card_id_name
+ON Card (card_id, name);
+
 CREATE TABLE Card_Set (
 	set_id int NOT NULL AUTO_INCREMENT,
 	name varchar(50),
 	max_cards DECIMAL(3,0) NOT NULL,
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
+
+CREATE INDEX idx_card_set_id
+ON Card_Set (set_id);
 
 CREATE TABLE Cards_In_Set (
 	set_id int NOT NULL AUTO_INCREMENT,
@@ -119,6 +152,9 @@ CREATE TABLE Cards_In_Set (
 	CONSTRAINT cis_fk_card_id FOREIGN KEY (card_id) REFERENCES Card(card_id),
 	CONSTRAINT pk_cis PRIMARY KEY (set_id, card_id)
 );
+
+CREATE INDEX idx_cards_in_set_ids
+ON Cards_In_Set (set_id, card_id);
 
 CREATE TABLE Product (
 	product_id int NOT NULL AUTO_INCREMENT,
@@ -141,6 +177,9 @@ CREATE TABLE Product (
 	CONSTRAINT product_fk_marketplace FOREIGN KEY (marketplace_id) REFERENCES Marketplace(marketplace_id)
 );
 
+CREATE INDEX idx_product_ids
+ON Product (product_id, marketplace_id);
+
 CREATE TABLE Discount (
 	discount_id int NOT NULL AUTO_INCREMENT,
 	product_id int,
@@ -156,6 +195,9 @@ CREATE TABLE Discount (
 	CONSTRAINT disc_fk_event FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
 
+CREATE INDEX idx_discount_ids
+ON Discount (discount_id, product_id, category_id);
+
 CREATE TABLE Cart (
 	cart_id int NOT NULL AUTO_INCREMENT,
 	buyer_id int NOT NULL,
@@ -164,6 +206,9 @@ CREATE TABLE Cart (
 	CONSTRAINT pk_cart PRIMARY KEY (cart_id),
 	CONSTRAINT fk_buyer_id FOREIGN KEY (buyer_id) REFERENCES Person(person_id)
 );
+
+CREATE INDEX idx_cart_ids
+ON Cart (cart_id, buyer_id);
 
 CREATE TABLE Cart_Item (
 	cart_item_id int NOT NULL AUTO_INCREMENT,
@@ -175,3 +220,6 @@ CREATE TABLE Cart_Item (
 	CONSTRAINT ci_fk_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
 	CONSTRAINT ci_fk_product FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
+
+CREATE INDEX idx_cart_item_ids
+ON Cart_Item (cart_item_id, cart_id, product_id);
