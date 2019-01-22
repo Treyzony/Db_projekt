@@ -6,7 +6,7 @@ CREATE TABLE Person (
 	username varchar(50) NOT NULL,
 	password varchar(50) NOT NULL,
 	city varchar(100) NOT NULL,
-	zip varchar(100) NOT NULL,
+	zip varchar(100),
 	street varchar(100) NOT NULL,
 	customer_rating DECIMAL(3,1),
 	CONSTRAINT pk_person PRIMARY KEY (person_id),
