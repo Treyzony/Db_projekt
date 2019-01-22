@@ -218,7 +218,7 @@ CREATE TABLE Card_Set (
 	set_id int NOT NULL,
 	name varchar(50),
 	short varchar(4),
-	max_cards DECIMAL(3,0) NOT NULL,
+	max_cards DECIMAL(3,0),
 	CONSTRAINT pk_set PRIMARY KEY (set_id)
 );
 
