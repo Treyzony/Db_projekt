@@ -1,5 +1,5 @@
 INSERT INTO Cards_In_Set (card_id, set_id) 
-SELECT Card2.Nid, Card_Set.set_id
+SELECT Card.Nid, Card_Set.set_id
 FROM Card2 LEFT JOIN Card_Set on Card2.Nset = Card_Set.short
 ;
 
