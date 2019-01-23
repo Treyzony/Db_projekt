@@ -1,33 +1,11 @@
+INSERT INTO `card_design` (`card_design_id`, `image`, `cover`) VALUES
+(1, 'Krasses Bild', 'None'),
+(2, 'Strong Buddies', 'Gold');
 
 
-
-INSERT INTO `person` (`person_id`, `first_name`, `last_name`, `email_id`, `username`, `password`, `city`, `zip`, `street`, `customer_rating`) VALUES
-(1, 'Cece', 'Kobpal', 'ckobpal0@linkedin.com', 'ceces', 'Uf22CX2L7JyF', 'Sungaiduri', '90', 'Mendota Avenue', NULL),
-(3, 'Lorilyn', 'Goudy', 'lgoudy1@yelp.com', 'lori', 'S8qEuIw009', 'Sapouy', '23123', '088 Bartelt Drive', NULL),
-(4, 'Maryjo', 'Cottie', 'mcottie2@free.fr', 'gsdfgsdfg', 'wqd0tUqQcFX', '?alw?n', '5806', '4079 Red Cloud Park', NULL),
-(5, 'Mead', 'Jarlmann', 'mjarlmanna@themeforest.net', 'mjarlmanna', 'ImgE1zppq6K', 'Quatre Bornes', '45324525', '5 Jana Trail', NULL),
-(6, 'Niall', 'Kynvin', 'nkynvine@xinhuanet.com', '', 'WHC5scFwMJ', 'Schieren', 'L-9184', 'hgdfh', NULL);
-
-INSERT INTO `collaborator` (`collaborator_id`, `person_id`, `permission_lvl`) VALUES
-(1, 1, '0'),
-(2, 3, '1');
-
-INSERT INTO `merch` (`merch_id`, `name`, `typename`) VALUES (NULL, 'Magic Karten T shirt', 'Kleidung'), (NULL, 'Magic Karten Pullover', 'Kleidung');
-
-INSERT INTO `event` (`event_id`, `collaborator_id`, `name`, `description`, `start_date`, `end_date`) VALUES (NULL, '1', 'Black Friday', 'Jetz gibts rabat aktionen auf verschiedene Artikel', '2019-01-24 00:00:00', '2019-01-26 00:00:00'), (NULL, '1', 'Osterm', 'Alle rote Karten sid reduziert', '2019-01-24 00:00:00', '2019-01-25 00:00:00');
-
-INSERT INTO `evaluation` (`evaluation_id`, `rating`, `qualtity`, `evaluation_comment`) VALUES (NULL, '6', 'sehr gut', 'Diese Karte ist selten und macht einen guten Eindruck\r\nSie ist im guten bis sehr gutem ZUstand'), (NULL, '2', 'schlecht', 'Die Karte hat starke abnnutzungserscheinungen und ist nicht gut verkäuflich');
-
-INSERT INTO `category` (`category_id`, `name`, `description`) VALUES (NULL, 'Sommerset', 'Sommerkarten'), (NULL, 'Winterset', 'Winterkarten usw');
-
-INSERT INTO `card_set` (`set_id`, `name`, `max_cards`) VALUES (NULL, 'Winterwonderland', '40'), (NULL, 'Summertime', '60');
-
-INSERT INTO `marketplace` (`marketplace_id`, `owner_id`, `name`, `rating`) VALUES (NULL, '1', 'Ceces Shop', '4'), (NULL, '1', 'Magic Card shhop', NULL);
-
-INSERT INTO `card_design` (`card_design_id`, `image`, `cover`) VALUES (NULL, 'Krasses Bild', 'None'), (NULL, 'Strong Buddies', 'Gold');
 
 INSERT INTO `card` (`card_id`, `name`, `converted_mana_cost`, `typename`, `subtypename`, `powercnt`, `toughness`, `rules`, `rarity`, `other_criteria`, `in_state`, `card_color`, `card_language`, `artistname`, `card_design_id`, `name_CN`, `name_TW`, `name_FR`, `name_DE`, `name_IT`, `name_JP`, `name_PT`, `name_RU`, `name_ES`, `name_KO`, `type_CN`, `type_TW`, `type_FR`, `type_DE`, `type_IT`, `type_JP`, `type_PT`, `type_RU`, `type_ES`, `type_KO`) VALUES
-(73995, 'Soratami Mindsweeper', '4', 'Creature — Moonfolk Wizard', NULL, '1', '4', NULL, 'U', NULL, NULL, 'U', NULL, 'Alex Horley-Orlandelli', NULL, NULL, NULL, 'Cérébreffaceur soratami', 'Soratami-Gedankenlöscher', 'Spazzamente Soratami', '???????', 'Limpa-Mentes Soratami', NULL, 'Barremente soratami', NULL, NULL, NULL, 'Créature : lunaréen et sorcier', 'Kreatur - Mondvolk, Zauberer', 'Creatura - Mago Lunantropo', '?????? — ?????????????', 'Criatura - Mago Cidadão-da-Lua', NULL, 'Criatura - Hechicero pueblo lunar', NULL),
+(73995, 'Soratami Mindsweeper', '4', 'Creature — Moonfolk Wizard', NULL, '1', '4', NULL, 'U', NULL, NULL, 'U', NULL, 'Alex Horley-Orlandelli', 2, NULL, NULL, 'Cérébreffaceur soratami', 'Soratami-Gedankenlöscher', 'Spazzamente Soratami', '???????', 'Limpa-Mentes Soratami', NULL, 'Barremente soratami', NULL, NULL, NULL, 'Créature : lunaréen et sorcier', 'Kreatur - Mondvolk, Zauberer', 'Creatura - Mago Lunantropo', '?????? — ?????????????', 'Criatura - Mago Cidadão-da-Lua', NULL, 'Criatura - Hechicero pueblo lunar', NULL),
 (73997, 'Stream of Consciousness', '2', 'Instant — Arcane', NULL, NULL, NULL, '£12/7/2018 : Stream of Consciousness can’t be one of the target cards you shuffle into your library.£12/7/2018 : You choose the target cards; the target player doesn’t. They may offer suggestions.£12/', 'U', NULL, NULL, 'U', NULL, 'John Avon', NULL, NULL, NULL, 'Source de conscience', 'Bewusstseinsquelle', 'Flusso di Coscienza', '?????', 'Fluxo de Consciência', NULL, 'Flujo de conciencia', NULL, NULL, NULL, 'Éphémère : arcane', 'Spontanzauber - Arkan', 'Istantaneo - Arcano', '?????? — ??', 'Mágica Instantânea - Arcana', NULL, 'Instantáneo - Arcano', NULL),
 (74006, 'Mark of the Oni', '3', 'Enchantment — Aura', NULL, NULL, NULL, NULL, 'U', NULL, NULL, 'B', NULL, 'Heather Hudson', NULL, NULL, NULL, 'Marque des oni', 'Mal der Oni', 'Segno degli Oni', '???', 'Marca dos Onis', NULL, 'Marca de los oni', NULL, NULL, NULL, 'Enchanter : créature', 'Kreaturenverzauberung', 'Incanta Creatura', '??????????????', 'Encantar Criatura', NULL, 'Encantar criatura', NULL),
 (74023, 'Twist Allegiance', '7', 'Sorcery', NULL, NULL, NULL, NULL, 'R', NULL, NULL, 'R', NULL, 'Wayne Reynolds', NULL, NULL, NULL, 'Changement d\'allégeance', 'Gefolgschaftswechsel', 'Invertire le Alleanze', '??????', 'Fidelidade Deturpada', NULL, 'Invertir la lealtad', NULL, NULL, NULL, 'Rituel', 'Hexerei', 'Stregoneria', '?????', 'Feitiço', NULL, 'Conjuro', NULL),
@@ -231,3 +209,314 @@ INSERT INTO `card` (`card_id`, `name`, `converted_mana_cost`, `typename`, `subty
 (378517, 'Ephara, God of the Polis', '4', 'Legendary Enchantment Creature — God', NULL, '6', '5', '£9/15/2013 : Numeric mana symbols ({0}, {1}, and so on) in mana costs of permanents you control don’t count toward your devotion to any color.£9/15/2013 : Mana symbols in the text boxes of permanents ', 'M', NULL, NULL, 'W', NULL, 'Eric Deschamps', NULL, NULL, NULL, 'Éphara, déesse de la Polis', 'Ephara, Göttin der Polis', 'Efara, Dea della Polis', '???????????', 'Efara, Deusa da Pólis', '?????, ?????? ??????', 'Efara, diosa de la polis', '???? ? ???', NULL, NULL, 'Créature-enchantement légendaire : dieu', 'Legendäre Verzauberungskreatur — Gott', 'Creatura Incantesimo Leggendaria — Dio', '???????????????? — ?', 'Criatura Encantamento Lendária — Deus', '??????????? ???? ???????? — ???', 'Criatura encantamiento legendaria — Deidad', '??? ???? ?? — ?'),
 (378518, 'Ephara\'s Enlightenment', '3', 'Enchantment — Aura', NULL, NULL, NULL, '£2/1/2014 : The last ability of Ephara’s Enlightenment will trigger only if it’s on the battlefield when the creature enters the battlefield under your control. You may return it to its owner’s hand o', 'U', NULL, NULL, 'W', NULL, 'Wesley Burt', NULL, NULL, NULL, 'Illumination selon Éphara', 'Epharas Erleuchtung', 'Illuminazione di Efara', '???????', 'Iluminação de Efara', '??????????? ?????', 'Iluminación de Efara', '???? ???', NULL, NULL, 'Enchantement : aura', 'Verzauberung — Aura', 'Incantesimo — Aura', '?????? — ???', 'Encantamento — Aura', '???? — ????', 'Encantamiento — Aura', '???? — ???'),
 (378529, 'Astral Cornucopia', '0', 'Artifact', NULL, NULL, NULL, '£2/1/2014 : If you choose 1 for the value of X, Astral Cornucopia will cost {3} to cast and enter the battlefield with one charge counter. If you choose 2 for the value of X, it will cost {6} to cast ', 'R', NULL, NULL, 'A', NULL, 'Aleksi Briclot', NULL, NULL, NULL, 'Cornucopée astrale', 'Astrales Füllhorn', 'Cornucopia Astrale', '??????', 'Cornucópia Astral', '???????? ??? ????????', 'Cornucopia astral', '?? ??? ?', NULL, NULL, 'Artefact', 'Artefakt', 'Artefatto', '????????', 'Artefato', '????????', 'Artefacto', '????');
+
+INSERT INTO `card_set` (`set_id`, `name`, `short`) VALUES
+(1, 'Winterwonderland', NULL),
+(2, 'Summertime', NULL),
+(3, '11', 'BOK'),
+(4, '11', 'BNG'),
+(5, '16', 'CHK'),
+(6, '14', 'CH'),
+(7, '10', 'EVK'),
+(8, '12', 'EVI'),
+(9, '11', 'FD'),
+(10, '10', '5E'),
+(11, '11', 'V14'),
+(12, '12', 'V09'),
+(13, '9', 'IA'),
+(14, '15', 'IMA'),
+(15, '9', 'PXTC'),
+(16, '16', 'M10'),
+(17, '15', 'M11'),
+(18, '11', 'M12'),
+(19, '10', 'M13'),
+(20, '15', 'M14'),
+(21, '10', 'M15'),
+(22, '11', 'M19'),
+(23, '14', 'PP2'),
+(24, '12', 'PS'),
+(25, '15', 'SOM'),
+(26, '9', '7E');
+
+INSERT INTO `cards_in_set` (`set_id`, `card_id`, `number_in_set`) VALUES
+(3, 73995, NULL),
+(3, 73997, NULL),
+(3, 74006, NULL),
+(3, 74023, NULL),
+(3, 74027, NULL),
+(3, 74028, NULL),
+(3, 74032, NULL),
+(3, 74033, NULL),
+(3, 74034, NULL),
+(3, 74035, NULL),
+(3, 74039, NULL),
+(3, 74041, NULL),
+(3, 74084, NULL),
+(3, 74086, NULL),
+(3, 74087, NULL),
+(3, 74090, NULL),
+(3, 74091, NULL),
+(3, 74092, NULL),
+(3, 74093, NULL),
+(3, 74095, NULL),
+(3, 74096, NULL),
+(3, 74097, NULL),
+(3, 74099, NULL),
+(3, 74100, NULL),
+(3, 74108, NULL),
+(3, 74109, NULL),
+(3, 74110, NULL),
+(3, 74113, NULL),
+(3, 74117, NULL),
+(3, 74122, NULL),
+(3, 74124, NULL),
+(3, 74127, NULL),
+(3, 74128, NULL),
+(3, 74410, NULL),
+(3, 74412, NULL),
+(3, 74415, NULL),
+(3, 74417, NULL),
+(3, 74422, NULL),
+(3, 74424, NULL),
+(3, 74427, NULL),
+(3, 74428, NULL),
+(3, 74430, NULL),
+(3, 74431, NULL),
+(3, 74433, NULL),
+(3, 74435, NULL),
+(3, 74436, NULL),
+(3, 74441, NULL),
+(3, 74443, NULL),
+(3, 74445, NULL),
+(3, 74447, NULL),
+(3, 74448, NULL),
+(3, 74451, NULL),
+(3, 74455, NULL),
+(3, 74458, NULL),
+(3, 74460, NULL),
+(3, 74461, NULL),
+(3, 74465, NULL),
+(3, 74467, NULL),
+(3, 74469, NULL),
+(3, 74473, NULL),
+(3, 74475, NULL),
+(3, 74476, NULL),
+(3, 74480, NULL),
+(3, 74481, NULL),
+(3, 74487, NULL),
+(3, 74488, NULL),
+(3, 74489, NULL),
+(3, 74490, NULL),
+(3, 74493, NULL),
+(3, 74496, NULL),
+(3, 74500, NULL),
+(3, 74507, NULL),
+(3, 74510, NULL),
+(3, 74512, NULL),
+(3, 74513, NULL),
+(3, 74515, NULL),
+(3, 74517, NULL),
+(3, 74518, NULL),
+(3, 74519, NULL),
+(3, 74522, NULL),
+(3, 74526, NULL),
+(3, 74532, NULL),
+(3, 74534, NULL),
+(3, 74535, NULL),
+(3, 74536, NULL),
+(3, 74538, NULL),
+(3, 74541, NULL),
+(3, 74542, NULL),
+(3, 74544, NULL),
+(3, 74545, NULL),
+(3, 74546, NULL),
+(3, 74552, NULL),
+(3, 74554, NULL),
+(3, 74555, NULL),
+(3, 74568, NULL),
+(3, 74571, NULL),
+(3, 74572, NULL),
+(3, 74573, NULL),
+(3, 74576, NULL),
+(3, 74577, NULL),
+(3, 74578, NULL),
+(3, 74580, NULL),
+(3, 74581, NULL),
+(3, 74582, NULL),
+(3, 74584, NULL),
+(3, 74585, NULL),
+(3, 74587, NULL),
+(3, 74589, NULL),
+(3, 74590, NULL),
+(3, 74594, NULL),
+(3, 74596, NULL),
+(3, 74597, NULL),
+(3, 74598, NULL),
+(3, 74600, NULL),
+(3, 74603, NULL),
+(3, 74607, NULL),
+(3, 74609, NULL),
+(3, 74610, NULL),
+(3, 74612, NULL),
+(3, 74613, NULL),
+(3, 74615, NULL),
+(3, 74616, NULL),
+(3, 74619, NULL),
+(3, 74620, NULL),
+(3, 74621, NULL),
+(3, 74623, NULL),
+(3, 74625, NULL),
+(3, 74626, NULL),
+(3, 74627, NULL),
+(3, 74628, NULL),
+(3, 74629, NULL),
+(3, 74636, NULL),
+(3, 74637, NULL),
+(3, 74640, NULL),
+(3, 74642, NULL),
+(3, 74643, NULL),
+(3, 74644, NULL),
+(3, 74645, NULL),
+(3, 74646, NULL),
+(3, 74647, NULL),
+(3, 74652, NULL),
+(3, 74655, NULL),
+(3, 74657, NULL),
+(3, 74660, NULL),
+(3, 74665, NULL),
+(3, 74666, NULL),
+(3, 74668, NULL),
+(3, 74669, NULL),
+(3, 74670, NULL),
+(3, 74671, NULL),
+(3, 75364, NULL),
+(3, 81968, NULL),
+(3, 81976, NULL),
+(3, 81977, NULL),
+(3, 81978, NULL),
+(3, 81979, NULL),
+(3, 81982, NULL),
+(3, 81983, NULL),
+(3, 81986, NULL),
+(3, 81987, NULL),
+(3, 81989, NULL),
+(3, 81990, NULL),
+(3, 81991, NULL),
+(3, 81997, NULL),
+(3, 81998, NULL),
+(4, 378373, NULL),
+(4, 378374, NULL),
+(4, 378375, NULL),
+(4, 378376, NULL),
+(4, 378377, NULL),
+(4, 378378, NULL),
+(4, 378379, NULL),
+(4, 378380, NULL),
+(4, 378402, NULL),
+(4, 378403, NULL),
+(4, 378404, NULL),
+(4, 378405, NULL),
+(4, 378406, NULL),
+(4, 378407, NULL),
+(4, 378408, NULL),
+(4, 378430, NULL),
+(4, 378431, NULL),
+(4, 378432, NULL),
+(4, 378433, NULL),
+(4, 378434, NULL),
+(4, 378435, NULL),
+(4, 378436, NULL),
+(4, 378437, NULL),
+(4, 378438, NULL),
+(4, 378459, NULL),
+(4, 378460, NULL),
+(4, 378461, NULL),
+(4, 378462, NULL),
+(4, 378488, NULL),
+(4, 378489, NULL),
+(4, 378490, NULL),
+(4, 378491, NULL),
+(4, 378492, NULL),
+(4, 378516, NULL),
+(4, 378517, NULL),
+(4, 378518, NULL),
+(4, 378529, NULL);
+
+
+
+
+
+INSERT INTO `person` (`person_id`, `first_name`, `last_name`, `email_id`, `username`, `password`, `city`, `zip`, `street`, `customer_rating`) VALUES
+(1, 'Cece', 'Kobpal', 'ckobpal0@linkedin.com', 'ceces', 'Uf22CX2L7JyF', 'Sungaiduri', '90', 'Mendota Avenue', NULL),
+(3, 'Lorilyn', 'Goudy', 'lgoudy1@yelp.com', 'lori', 'S8qEuIw009', 'Sapouy', '23123', '088 Bartelt Drive', NULL),
+(4, 'Maryjo', 'Cottie', 'mcottie2@free.fr', 'gsdfgsdfg', 'wqd0tUqQcFX', '?alw?n', '5806', '4079 Red Cloud Park', NULL),
+(5, 'Mead', 'Jarlmann', 'mjarlmanna@themeforest.net', 'mjarlmanna', 'ImgE1zppq6K', 'Quatre Bornes', '45324525', '5 Jana Trail', NULL),
+(6, 'Niall', 'Kynvin', 'nkynvine@xinhuanet.com', '', 'WHC5scFwMJ', 'Schieren', 'L-9184', 'hgdfh', NULL);
+
+
+
+INSERT INTO `cart` (`cart_id`, `buyer_id`, `name`, `date_of_creation`) VALUES
+(1, 4, 'Einkaufswagen eins', '2019-01-08'),
+(2, 5, 'Einkauf', '2019-01-12');
+
+
+
+
+
+
+
+INSERT INTO `category` (`category_id`, `name`, `description`) VALUES
+(1, 'Sommerset', 'Sommerkarten'),
+(2, 'Winterset', 'Winterkarten usw');
+
+
+INSERT INTO `collaborator` (`collaborator_id`, `person_id`, `permission_lvl`) VALUES
+(1, 1, '0'),
+(2, 3, '1');
+
+
+
+
+
+INSERT INTO `evaluation` (`evaluation_id`, `rating`, `qualtity`, `evaluation_comment`) VALUES
+(1, '6.00', 'sehr gut', 'Diese Karte ist selten und macht einen guten Eindruck\r\nSie ist im guten bis sehr gutem ZUstand'),
+(2, '2.00', 'schlecht', 'Die Karte hat starke abnnutzungserscheinungen und ist nicht gut verkäuflich');
+
+
+
+INSERT INTO `event` (`event_id`, `collaborator_id`, `name`, `description`, `start_date`, `end_date`) VALUES
+(1, 1, 'Black Friday', 'Jetz gibts rabat aktionen auf verschiedene Artikel', '2019-01-24 00:00:00', '2019-01-26 00:00:00'),
+(2, 1, 'Osterm', 'Alle rote Karten sid reduziert', '2019-01-24 00:00:00', '2019-01-25 00:00:00');
+
+
+
+INSERT INTO `marketplace` (`marketplace_id`, `owner_id`, `name`, `rating`) VALUES
+(1, 1, 'Ceces Shop', '4.0'),
+(2, 1, 'Magic Card shhop', NULL);
+
+
+
+INSERT INTO `merch` (`merch_id`, `name`, `typename`) VALUES
+(1, 'Magic Karten T shirt', 'Kleidung'),
+(2, 'Magic Karten Pullover', 'Kleidung');
+
+
+
+INSERT INTO `news` (`news_id`, `collaborator_id`, `name`, `start_date`, `end_date`, `message`) VALUES
+(1, 1, 'Neues Deck erschienen', '2019-01-04 00:00:00', '2019-01-19 00:00:00', 'Das brandheisse neue Deck ist da'),
+(2, 1, 'Superboosster pack', '2019-01-02 00:00:00', '2019-01-04 00:00:00', 'Hol es dir jetzt');
+
+
+
+
+
+INSERT INTO `product` (`product_id`, `marketplace_id`, `price`, `model`, `stock`, `category_id`, `card_id`, `card_set_id`, `merch_id`, `evaluation_id`) VALUES
+(3, 2, '40.00', NULL, '7', 1, 378403, NULL, NULL, NULL),
+(4, 2, '40.00', NULL, '4', 1, NULL, 3, NULL, NULL);
+
+INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `quantity`, `cost_at_time`) VALUES
+(1, 2, 3, '4', '10.00'),
+(2, 2, 4, '1', '40.00');
+
+INSERT INTO `discount` (`discount_id`, `product_id`, `category_id`, `event_id`, `name`, `discount_rate`) VALUES
+(1, 4, 1, 2, 'Megarabat', '9.999');
